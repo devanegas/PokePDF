@@ -9,12 +9,15 @@ namespace PokePDF.API
 {
     public interface IPokeAPI
     {
-        [Get("api/v2/pokemon/{name}")]
+        [Get("/api/v2/pokemon/{name}")]
         Task<Pokemon> GetPokeInformationAsync(string name);
 
 
-        [Get("api/v2/pokemon?limit=9999")]
+        [Get("/api/v2/pokemon?limit=9999")]
         Task<PokemonNames> GetAllPokemonInformationAsync();
+
+        [Get("/api/v2/type/{type}")]
+        Task<PokemonByType> GetAllPokemonByTypeAsync(string type);
 
     }
 }

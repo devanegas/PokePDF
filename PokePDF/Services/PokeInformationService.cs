@@ -13,21 +13,43 @@ namespace PokePDF.Services
     {
         public async Task<IEnumerable<string>> GetAllPokemonNamesAsync()
         {
-            throw new NotImplementedException();
+            var PokeApi = RestService.For<IPokeAPI>("https://pokeapi.co");
+            var PokemonList = await PokeApi.GetAllPokemonInformationAsync();
+
+            return PokemonList.Results.Select(r => r.Name);
         }
 
         public async Task<Pokemon> GetPokemonInfoAsync(string name)
         {
-            throw new NotImplementedException();
+            var PokeApi = RestService.For<IPokeAPI>("https://pokeapi.co");
+            var Pokemon = await PokeApi.GetPokeInformationAsync(name);
+
+            return Pokemon;
         }
         public async Task<IEnumerable<Pokemon>> GetPokemonByType(string name)
         {
-            throw new NotImplementedException();
+            var PokeApi = RestService.For<IPokeAPI>("https://pokeapi.co");
+            //Enum.TryParse(name, out TypeEnum pokeType);
+            var PokemonNames = await PokeApi.GetAllPokemonByTypeAsync(name.ToLower());
+            var Pokemon = new List<Pokemon>();
+            foreach(var pokeName in PokemonNames.PokemonNames)
+            {
+                var p = await GetPokemonInfoAsync(pokeName.Name.Name);
+                Pokemon.Add(p);
+            }
+
+
+            return Pokemon;
         }
 
-        public async Task<IEnumerable<Pokemon>> SortPokemonList(List<Pokemon> unsortedPokemon)
+        public IEnumerable<Pokemon> SortPokemonList(List<Pokemon> unsortedPokemon)
         {
-            throw new NotImplementedException();
+            if (unsortedPokemon == null)
+            {
+                throw new ArgumentNullException();
+            }
+            var sortedPokemon = unsortedPokemon.OrderBy(n => n.Name).ToList();
+            return sortedPokemon;
         }
     }
 }

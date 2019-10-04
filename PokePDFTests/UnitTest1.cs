@@ -3,6 +3,7 @@ using NUnit.Framework;
 using PokePDF.Models;
 using PokePDF.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PokePDFTests
 {
@@ -14,36 +15,40 @@ namespace PokePDFTests
         }
 
         [Test]
-        public void UserEntersPokemonName_GetsPokemonInformationBack()
+        public async Task UserEntersPokemonName_GetsPokemonInformationBack()
         {
-            string name = "Bulbasaur";
+            string name = "pikachu";
             var PokeService = new Mock<PokeInformationService>();
-            var Pokemon = PokeService.Object.GetPokemonInfoAsync(name);
+            var Pokemon = await PokeService.Object.GetPokemonInfoAsync(name);
 
-            if (Pokemon.Result.Name.Equals(name))
+            if (Pokemon.Name.Equals(name))
             {
-                Assert.IsNotNull(Pokemon);
+                Assert.Pass();
             }
 
             Assert.Fail();
         }
 
         [Test]
-        public void UserEntersPokemonType_GetsAllPokemonOfThatType()
+        public async Task UserEntersPokemonType_GetsAllPokemonOfThatType()
         {
-            string type = "Flying";
-            var PokeService = new Mock<PokeInformationService>();
-            var Pokemons = PokeService.Object.GetPokemonByType(type);
+            string type = "flying";
+            //var PokeService = new Mock<PokeInformationService>();
+            var PokeService = new PokeInformationService();
+            var Pokemons = await PokeService.GetPokemonByType(type);
 
-            foreach(var pokemon in Pokemons.Result)
+            foreach(var pokemon in Pokemons)
             {
-                if(pokemon.PokemonTypes[0].PokemonType.Name.Equals(type))
+                if(pokemon.PokemonTypes[0].PokemonType.Name.Equals(type) == false)
                 {
-                    Assert.IsNotNull(Pokemons);
+                    if (pokemon.PokemonTypes[1].PokemonType.Name.Equals(type) == false)
+                        Assert.Fail();
                 }
             }
 
-            Assert.Fail();
+            Assert.Pass();
+
+
         }
 
         [Test]
@@ -72,7 +77,7 @@ namespace PokePDFTests
             var SortedPokemons = PokeService.Object.SortPokemonList(UnsortedPokemon);
 
             int i = 0;
-            foreach(var pokemon in SortedPokemons.Result)
+            foreach(var pokemon in SortedPokemons)
             {
                 if (pokemon.Name.Equals(SortedPokemonSolution[i].Name))
                 {

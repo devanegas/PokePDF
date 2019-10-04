@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PokePDF
+namespace PokePDF.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
