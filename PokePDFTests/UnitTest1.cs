@@ -119,7 +119,7 @@ namespace PokePDFTests
         }
 
         [Test]
-        public void UserEntersInvalidPokemonName_IsPokemonNameValidReturnsFalse()
+        public async Task UserEntersInvalidPokemonName_IsPokemonNameValidReturnsFalse()
         {
             var InvalidNames = new List<string>()
             {
@@ -133,7 +133,7 @@ namespace PokePDFTests
             var service = new PokeInformationService();
             foreach(var invalidName in InvalidNames)
             {
-                if (service.IsPokemonNameValid(invalidName))
+                if (await service.IsPokemonNameValid(invalidName))
                 {
                     Assert.Fail();
                 }
