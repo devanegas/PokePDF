@@ -55,7 +55,14 @@ namespace PokePDF.Services
 
         public IEnumerable<string> PokemonEnumerabletoStringConverter(IEnumerable<Pokemon> pokemons)
         {
-            throw new NotImplementedException();
+            var PokemonList = new List<string>();
+
+            foreach(var pokemon in pokemons)
+            {
+                PokemonList.Add(pokemon.ToString());
+            }
+
+            return PokemonList;
         }
     }
 }

@@ -107,7 +107,7 @@ namespace PokePDFTests
             var i = 0;
             foreach (var PokeString in PokeStrings)
             {
-                if (!PokeString.Equals(PokeList[i]))
+                if (!PokeString.Equals(PokeList[i].Name))
                 {
                     Assert.Fail();
                 }
