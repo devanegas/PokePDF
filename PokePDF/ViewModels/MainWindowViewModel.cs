@@ -28,7 +28,6 @@ namespace PokePDF.ViewModels
             _pokeService = new PokeInformationService();
             SearchPokemon = new AwaitableDelegateCommand(SearchPokemonAsync);
             SortByTypeCommand = new AwaitableDelegateCommand(SortByType);
-            //SearchPokemonAsync();
             PrintAllPokemonAsync();
         }
 
