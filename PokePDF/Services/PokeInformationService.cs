@@ -65,19 +65,24 @@ namespace PokePDF.Services
             return PokemonList;
         }
 
-        public async Task<bool> IsPokemonNameValid(string name)
-        {
-            var PokeApi = RestService.For<IPokeAPI>("https://pokeapi.co");
-            try
-            {
-                await PokeApi.GetPokeInformationAsync(name);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+        //public async Task<bool> IsPokemonNameValid(string name)
+        //{
+        //    var PokeApi = RestService.For<IPokeAPI>("https://pokeapi.co");
+        //    try
+        //    {
+        //        await PokeApi.GetPokeInformationAsync(name);
+        //        return true;
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
 
+        //}
+
+        public bool IsPokemonNameValid(string name, IEnumerable<string> allnames)
+        {
+            return allnames.Contains(name);
         }
     }
 }

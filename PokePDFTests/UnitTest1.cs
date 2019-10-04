@@ -133,7 +133,7 @@ namespace PokePDFTests
             var service = new PokeInformationService();
             foreach(var invalidName in InvalidNames)
             {
-                if (await service.IsPokemonNameValid(invalidName))
+                if (service.IsPokemonNameValid(invalidName, new List<string> { }))
                 {
                     Assert.Fail();
                 }
