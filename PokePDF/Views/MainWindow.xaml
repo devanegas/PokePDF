@@ -25,7 +25,8 @@
                 Content="Sort Pokemon"
                 Command="{Binding SortByTypeCommand}"/>
             <ComboBox ItemsSource="{Binding ListOfPokemonType}"
-                      SelectedValue="{Binding PokemonTypeProperty}" />
+                      SelectedValue="{Binding PokemonTypeProperty}"
+                      SelectedIndex="0"/>
             <ComboBox ItemsSource="{Binding AllPokemonNames}"
                       SelectedValue="{Binding PokemonName}" />
             <TextBlock Text="Id:"></TextBlock>

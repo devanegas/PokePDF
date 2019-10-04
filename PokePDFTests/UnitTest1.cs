@@ -117,5 +117,29 @@ namespace PokePDFTests
 
             Assert.Pass();
         }
+
+        [Test]
+        public void UserEntersInvalidPokemonName_IsPokemonNameValidReturnsFalse()
+        {
+            var InvalidNames = new List<string>()
+            {
+                "asdfad",
+                "sdfg",
+                "pikachuuu",
+                "giraina",
+                "asfdfdsaasdfasdf"
+            };
+
+            var service = new PokeInformationService();
+            foreach(var invalidName in InvalidNames)
+            {
+                if (service.IsPokemonNameValid(invalidName))
+                {
+                    Assert.Fail();
+                }
+            }
+
+            Assert.Pass();
+        }
     }
 }

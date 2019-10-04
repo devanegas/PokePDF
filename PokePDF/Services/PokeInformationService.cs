@@ -64,5 +64,10 @@ namespace PokePDF.Services
 
             return PokemonList;
         }
+
+        public bool IsPokemonNameValid(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace PokePDF.ViewModels
         public async Task SortByType()
         {
             var pokemonInfo = await _pokeService.GetPokemonByType(PokemonTypeProperty);
-            AllPokemonNames = (IEnumerable<string>)pokemonInfo;
+            AllPokemonNames = _pokeService.PokemonEnumerabletoStringConverter(pokemonInfo);
         }
 
         private string pokemonTypeProperty;
@@ -59,7 +59,6 @@ namespace PokePDF.ViewModels
             set { SetProperty(ref pokemonTypeProperty , value); }
         }
 
-        private List<string> listOfPokemonType;
 
         public List<string> ListOfPokemonType
         {
