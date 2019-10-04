@@ -10,7 +10,7 @@ namespace PokePDF.Models
         public string Name { get; set; }
         public List<Sprites> Sprites { get; set; }
         public List<Stats> Stats { get; set; }
-        public List<Types> Types { get; set; }
+        public List<PokemonTypes> PokemonTypes { get; set; }
         public int Weight { get; set; }
 
 
@@ -39,12 +39,12 @@ namespace PokePDF.Models
         public string Name { get; set; }
     }
 
-    public class Types
+    public class PokemonTypes
     {
-        public Type Type { get; set; }
+        public PokemonType PokemonType { get; set; }
     }
 
-    public class Type
+    public class PokemonType
     {
         public int Slot { get; set; }
         public string Name { get; set; }

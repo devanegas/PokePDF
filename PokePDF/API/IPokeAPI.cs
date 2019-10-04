@@ -15,5 +15,6 @@ namespace PokePDF.API
 
         [Get("api/v2/pokemon/")]
         Task<PokemonNames> GetAllPokemonInformationAsync();
+
     }
 }

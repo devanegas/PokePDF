@@ -13,18 +13,21 @@ namespace PokePDF.Services
     {
         public async Task<IEnumerable<string>> GetAllPokemonNamesAsync()
         {
-            var PokeApi = RestService.For<IPokeAPI>("https://pokeapi.co");
-            var PokemonList = await PokeApi.GetAllPokemonInformationAsync();
-
-            return PokemonList.Results.Select(r=>r.Name);
+            throw new NotImplementedException();
         }
 
         public async Task<Pokemon> GetPokemonInfoAsync(string name)
         {
-            var PokeApi = RestService.For<IPokeAPI>("https://pokeapi.co");
-            var Pokemon = await PokeApi.GetPokeInformationAsync(name);
+            throw new NotImplementedException();
+        }
+        public async Task<IEnumerable<Pokemon>> GetPokemonByType(string name)
+        {
+            throw new NotImplementedException();
+        }
 
-            return Pokemon;
+        public async Task<IEnumerable<Pokemon>> SortPokemonList(List<Pokemon> unsortedPokemon)
+        {
+            throw new NotImplementedException();
         }
     }
 }
