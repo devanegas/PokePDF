@@ -47,7 +47,7 @@ namespace PokePDF.ViewModels
         public async Task SortByType()
         {
             var pokemonInfo = await _pokeService.GetPokemonByType(PokemonTypeProperty);
-            AllPokemonNames = _pokeService.PokemonEnumerabletoStringConverter(pokemonInfo);
+            SortedPokemonNames = _pokeService.PokemonEnumerabletoStringConverter(pokemonInfo);
         }
 
         private string pokemonNameError;
@@ -122,7 +122,8 @@ namespace PokePDF.ViewModels
             get { return pokemonName; }
             set
             {
-                if (_pokeService.IsPokemonNameValid(value, AllPokemonNames) == false)
+                pokemonName = value.ToLower();
+                if (_pokeService.IsPokemonNameValid(pokemonName, AllPokemonNames) == false)
                 {
                     PokemonNameError = "This pokemon does not exist, yet...";
                 }
@@ -130,7 +131,7 @@ namespace PokePDF.ViewModels
                 {
                     PokemonNameError = null;
                 }
-                    SetProperty(ref pokemonName, value);
+                    SetProperty(ref pokemonName, pokemonName);
             }
         }
 
