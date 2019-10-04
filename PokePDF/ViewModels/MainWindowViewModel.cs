@@ -19,11 +19,14 @@ namespace PokePDF.ViewModels
         public ICommand PrintAllPokemon { get; }
         public ICommand SearchPokemon { get; }
 
+        public ICommand SortByTypeCommand { get; }
+
         public MainWindowViewModel()
         {
 
             _pokeService = new PokeInformationService();
             SearchPokemon = new AwaitableDelegateCommand(SearchPokemonAsync);
+            SortByTypeCommand = new AwaitableDelegateCommand(SortByType);
             SearchPokemonAsync();
             PrintAllPokemonAsync();
         }
@@ -55,6 +58,14 @@ namespace PokePDF.ViewModels
             get { return pokemonTypeProperty; }
             set { SetProperty(ref pokemonTypeProperty , value); }
         }
+
+        private List<string> listOfPokemonType;
+
+        public List<string> ListOfPokemonType
+        {
+            get { return PokemonTypeList.PokemonTypeNames; }
+        }
+
 
 
         private Pokemon pokemon;

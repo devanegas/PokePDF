@@ -51,5 +51,11 @@ namespace PokePDF.Services
             var sortedPokemon = unsortedPokemon.OrderBy(n => n.Name).ToList();
             return sortedPokemon;
         }
+
+
+        public IEnumerable<string> PokemonEnumerabletoStringConverter(IEnumerable<Pokemon> pokemons)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

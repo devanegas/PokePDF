@@ -21,6 +21,11 @@ namespace PokePDF.Models
         public int Weight { get; set; }
 
         public string GetName() { return Name; }
+
+        public override string ToString()
+        {
+            return GetName();
+        }
     }
 
     public class Sprites

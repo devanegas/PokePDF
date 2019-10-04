@@ -21,10 +21,13 @@
             <Button
                 Content="Search Pokemon"
                 Command="{Binding SearchPokemon}"/>
+            <Button
+                Content="Sort Pokemon"
+                Command="{Binding SortByTypeCommand}"/>
+            <ComboBox ItemsSource="{Binding ListOfPokemonType}"
+                      SelectedValue="{Binding PokemonTypeProperty}" />
             <ComboBox ItemsSource="{Binding AllPokemonNames}"
                       SelectedValue="{Binding PokemonName}" />
-
-
             <TextBlock Text="Id:"></TextBlock>
             <TextBlock Text="{Binding Pokemon.Id}"></TextBlock>
             <Image Width="100px"

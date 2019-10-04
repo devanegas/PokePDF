@@ -91,5 +91,31 @@ namespace PokePDFTests
 
             Assert.Pass();
         }
+
+        [Test]
+        public void UserSendsIEnumerableOfPokemon_GetsAnIEnumerableofStrings()
+        {
+            //make a list/enumerable data type of pokemon 3 fake pokemon
+            var PokeList = new List<Pokemon> {
+                                new Pokemon {Name = "Diego" },
+                                new Pokemon {Name = "Brandon" },
+                                new Pokemon {Name = "Kaydon"}};
+            //call our function with that list
+            var service = new PokeInformationService();
+            var PokeStrings = service.PokemonEnumerabletoStringConverter(PokeList);
+            //check to make sure that the list is only strings matching pokemon name
+            var i = 0;
+            foreach (var PokeString in PokeStrings)
+            {
+                if (!PokeString.Equals(PokeList[i]))
+                {
+                    Assert.Fail();
+                }
+
+                i++;
+            }
+
+            Assert.Pass();
+        }
     }
 }
