@@ -1,4 +1,5 @@
 ﻿using CommonServiceLocator;
+using Microsoft.Extensions.DependencyInjection;
 using PokePDF.Views;
 using Prism.Ioc;
 using Prism.Unity;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -24,6 +26,11 @@ namespace PokePDF
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+
+        }
+        public void ConfigureServices(IServiceCollection services)
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         }
         protected override void ConfigureServiceLocator()

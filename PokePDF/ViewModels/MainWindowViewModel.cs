@@ -16,7 +16,9 @@ namespace PokePDF.ViewModels
 {
     public class MainWindowViewModel : BindableDataErrorInfoBase
     {
-        private PokeInformationService _pokeService;
+        private readonly PokeInformationService _pokeService;
+        private readonly PrintingService _printingService;
+
         public ICommand PrintAllPokemon { get; }
         public ICommand SearchPokemon { get; }
         public ICommand SortByTypeCommand { get; }
@@ -26,9 +28,11 @@ namespace PokePDF.ViewModels
         {
 
             _pokeService = new PokeInformationService();
+            _printingService = new PrintingService();
             SearchPokemon = new AwaitableDelegateCommand(SearchPokemonAsync);
             SortByTypeCommand = new AwaitableDelegateCommand(SortByType);
             PrintAllPokemonAsync();
+           
         }
 
         public async Task PrintAllPokemonAsync()
@@ -37,6 +41,7 @@ namespace PokePDF.ViewModels
             Pokemon = await _pokeService.GetPokemonInfoAsync(PokemonName);
             AllPokemonNames = pokemon;
             SortedPokemonNames = pokemon;
+            _printingService.Print(await _pokeService.GetPokemonInfoAsync("pikachu"));
         }
         public async Task SearchPokemonAsync()
         {
