@@ -18,12 +18,14 @@ namespace PokePDF.ViewModels
         private PokeInformationService _pokeService;
         public ICommand PrintAllPokemon { get; }
         public ICommand SearchPokemon { get; }
+        public ICommand SortByType { get; }
 
         public MainWindowViewModel()
         {
 
             _pokeService = new PokeInformationService();
             SearchPokemon = new AwaitableDelegateCommand(SearchPokemonAsync);
+            SortByType = new AwaitableDelegateCommand(SortPokemonByType);
             SearchPokemonAsync();
             PrintAllPokemonAsync();
         }
@@ -42,11 +44,20 @@ namespace PokePDF.ViewModels
             Pokemon = pokemonInfo;
         }
 
-        public async Task SortByType()
+        public async Task SortPokemonByType()
         {
-            var pokemonInfo = await _pokeService.GetPokemonByType(PokemonTypeProperty);
-            AllPokemonNames = (IEnumerable<string>)pokemonInfo;
+            var pokemonInfo = await _pokeService.GetPokemonByType("fire");
+            SortedPokemonByType = pokemonInfo;
         }
+
+        private IEnumerable<Pokemon> sortedPokemonByType;
+
+        public IEnumerable<Pokemon> SortedPokemonByType
+        {
+            get { return sortedPokemonByType; }
+            set { SetProperty(ref sortedPokemonByType, value); }
+        }
+
 
         private string pokemonTypeProperty;
 

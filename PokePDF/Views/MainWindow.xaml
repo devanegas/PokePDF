@@ -18,9 +18,14 @@
         <StackPanel>
             <TextBox
                 Text="{Binding PokemonName}"/>
+            <ComboBox ItemsSource="{Binding SortedPokemonByType.Name}"
+                      SelectedValue="{Binding PokemonName}" />
             <Button
                 Content="Search Pokemon"
                 Command="{Binding SearchPokemon}"/>
+            <Button
+                Content="Sort By Type"
+                Command="{Binding SortByType}"/>
             <ComboBox ItemsSource="{Binding AllPokemonNames}"
                       SelectedValue="{Binding PokemonName}" />
 
