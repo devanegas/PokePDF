@@ -13,7 +13,7 @@ namespace PokePDF.API
         Task<Pokemon> GetPokeInformationAsync(string name);
 
 
-        [Get("api/v2/pokemon/")]
+        [Get("api/v2/pokemon?limit=9999")]
         Task<PokemonNames> GetAllPokemonInformationAsync();
 
     }
