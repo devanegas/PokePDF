@@ -46,16 +46,8 @@ namespace PokePDF.ViewModels
 
         public async Task SortPokemonByType()
         {
-            var pokemonInfo = await _pokeService.GetPokemonByType("fire");
-            SortedPokemonByType = pokemonInfo;
-        }
-
-        private IEnumerable<Pokemon> sortedPokemonByType;
-
-        public IEnumerable<Pokemon> SortedPokemonByType
-        {
-            get { return sortedPokemonByType; }
-            set { SetProperty(ref sortedPokemonByType, value); }
+            var pokemonInfo = await _pokeService.GetPokemonByType(PokemonTypeProperty);
+            AllPokemonNames = pokemonInfo;
         }
 
 
