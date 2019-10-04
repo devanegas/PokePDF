@@ -32,16 +32,14 @@ namespace PokePDFTests
         [Test]
         public async Task UserEntersPokemonType_GetsAllPokemonOfThatType()
         {
-            string type = "flying";
+            PokemonByType type = new PokemonByType { TypeName = "flying" };
             //var PokeService = new Mock<PokeInformationService>();
-            var PokeService = new PokeInformationService();
-            var Pokemons = await PokeService.GetPokemonByType(type);
 
             foreach(var pokemon in Pokemons)
             {
-                if(pokemon.PokemonTypes[0].PokemonType.Name.Equals(type) == false)
+                if(pokemon.Equals(type) == false)
                 {
-                    if (pokemon.PokemonTypes[1].PokemonType.Name.Equals(type) == false)
+                    if (pokemon.Equals(type) == false)
                         Assert.Fail();
                 }
             }

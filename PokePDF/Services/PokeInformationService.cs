@@ -26,20 +26,12 @@ namespace PokePDF.Services
 
             return Pokemon;
         }
-        public async Task<IEnumerable<string>> GetPokemonByType(string type)
+        public async Task<PokemonByType> GetPokemonByType(PokemonByType type)
         {
             var PokeApi = RestService.For<IPokeAPI>("https://pokeapi.co");
-            //Enum.TryParse(name, out TypeEnum pokeType);
-            var PokemonNames = await PokeApi.GetAllPokemonByTypeAsync(type.ToLower());
-            var PokemonStrings = new List<string>();
-            foreach(var pokeName in PokemonNames.PokemonNames)
-            {
-                var p = pokeName.Name.Name;
-                PokemonStrings.Add(p);
-            }
+            var PokemonNames = await PokeApi.GetAllPokemonByTypeAsync(type.TypeName);
 
-
-            return PokemonStrings;
+            return PokemonNames;
         }
 
         public IEnumerable<Pokemon> SortPokemonList(List<Pokemon> unsortedPokemon)

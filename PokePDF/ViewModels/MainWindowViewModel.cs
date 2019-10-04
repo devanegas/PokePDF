@@ -51,6 +51,8 @@ namespace PokePDF.ViewModels
         }
 
 
+
+
         private string pokemonTypeProperty;
 
         public string PokemonTypeProperty
