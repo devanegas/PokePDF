@@ -90,7 +90,7 @@ namespace PokePDF.Services
             renderer.Document = doc;
             renderer.WorkingDirectory = path;
             renderer.RenderDocument();
-            renderer.PdfDocument.Save(path + "report4.pdf");
+            renderer.PdfDocument.Save(path + "PokemonInfo.pdf");
             //Process.Start(path + "report3.pdf");
         }
 
