@@ -24,8 +24,11 @@ namespace PokePDF.Services
             var doc = new Document();
             var section = doc.AddSection();
             string image64;
-            var nameParagraph =section.AddParagraph(pokemon.Name);
+            var nameParagraph =section.AddParagraph(pokemon.Name.ToUpper());
+            nameParagraph.Format.Alignment= ParagraphAlignment.Center;
+            nameParagraph.Format.Font.Size = 20;
             var imageParagraph =section.AddParagraph();
+            imageParagraph.Format.Alignment = ParagraphAlignment.Center;
 
             image64 = getImageofPokemonSprite(pokemon.Sprites.Front_default);
             imageParagraph.AddImage(image64);
@@ -36,6 +39,7 @@ namespace PokePDF.Services
             image64 = getImageofPokemonSprite(pokemon.Sprites.Back_shiny);
             imageParagraph.AddImage(image64);
             imageParagraph =section.AddParagraph();
+            imageParagraph.Format.Alignment = ParagraphAlignment.Center;
             if (pokemon.Sprites.Front_female != null) {
                 image64 = getImageofPokemonSprite(pokemon.Sprites.Front_female);
                 imageParagraph.AddImage(image64);
@@ -58,19 +62,26 @@ namespace PokePDF.Services
 
             //header.AddFormattedText("This is my pdf", TextFormat.Bold);
 
-            var typeParagraph=section.AddParagraph("Type:");
+            var typeParagraph=section.AddParagraph();
+            var temp = typeParagraph.AddFormattedText("\nType: ");
+            temp.Size = 14;
             foreach(var type in pokemon.PokemonTypes)
             {
-                typeParagraph.AddFormattedText(type.PokemonType.Name);
+                typeParagraph.AddFormattedText(type.PokemonType.Name + " ");
             }
 
-            var weightParagraph = section.AddParagraph("Weight:");
-            weightParagraph.AddFormattedText(pokemon.Weight.ToString());
+            var weightParagraph = section.AddParagraph();
+            temp = weightParagraph.AddFormattedText("\nWeight: ");
+            temp.Size = 14;
+            weightParagraph.AddFormattedText(((decimal)pokemon.Weight/10).ToString()+" kg");
 
-            var statParagraph = section.AddParagraph("Stat:\n");
+            var statParagraph = section.AddParagraph();
+            temp = statParagraph.AddFormattedText("\nStats:\n");
+            temp.Size = 14;
             foreach (var stat in pokemon.Stats)
             {
-                statParagraph.AddFormattedText(stat.Stat.Name +": "+ stat.Base_stat.ToString()+'\n');
+                statParagraph.AddFormattedText(stat.Stat.Name +": ");
+                statParagraph.AddFormattedText(stat.Base_stat.ToString() + '\n');
             }
 
 
