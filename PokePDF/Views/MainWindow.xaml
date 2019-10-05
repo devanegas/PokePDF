@@ -11,7 +11,7 @@
         xmlns:services="clr-namespace:PokePDF.Services"
         mc:Ignorable="d"
         Background="#9C2827"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1200" Width="925">
     <Window.Resources>
         <services:ImageConverter x:Key="ImageConverter" />
         <BitmapImage x:Key="DefaultImage" UriSource="https://cdn4.iconfinder.com/data/icons/longico/224/longico-23-512.png" />
@@ -57,9 +57,9 @@
                 Value="500px"/>
         </Style>
     </Window.Resources>
-
-    <Grid>
-        <Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -76,12 +76,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
         <TextBlock
             Height="100px"
             Background="#B72F2E"
@@ -138,9 +138,15 @@
             SelectedIndex="0"
             Grid.Row="6"/>
 
+        <Button
+            Content="Sort Pokemon"
+            Command="{Binding SortByTypeCommand}"
+            Grid.ColumnSpan="3"
+            Grid.Row="7"/>
+
         <TextBlock
             Text="Select Pokemon By Filter:"
-            Grid.Row="7"
+            Grid.Row="8"
             Grid.ColumnSpan="3"
             FontWeight="Thin"
             FontSize="20px"
@@ -150,24 +156,26 @@
         <ComboBox ItemsSource="{Binding SortedPokemonNames}"
                 SelectedValue="{Binding PokemonName}"
                   Grid.ColumnSpan="3"
-                Grid.Row="8"/>
+                Grid.Row="9"/>
         <Button
-            Content="Sort Pokemon"
-            Command="{Binding SortByTypeCommand}"
+            Content="Search"
+            Command="{Binding SearchPokemon}"
+            Height="25px"
+            Width="100px"
             Grid.ColumnSpan="3"
-            Grid.Row="9"/>
+            Grid.Row="10"/>
 
-        <TextBlock
-            Grid.Row="10"
+            <TextBlock
+            Grid.Row="11"
             FontSize="30px"
             Grid.Column="0"
             Text="{Binding Pokemon.Id, StringFormat=Pokemon ID: {0}}"></TextBlock>
         <TextBlock
-            Grid.Row="11"
+            Grid.Row="12"
             FontSize="25px"
             Text="{Binding Pokemon.Name, StringFormat=Pokemon Name: {0}}"/>
         <ListView ItemsSource="{Binding PokemonStats}"
-                  Grid.Row="11"
+                  Grid.Row="12"
                   Grid.Column="2"
                   Grid.RowSpan="2"
                   Width="150px"
@@ -186,7 +194,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Border CornerRadius="20" Grid.Row="12">
+        <Border CornerRadius="20" Grid.Row="13">
             <TextBlock
                 Height="400px"
                 Background="#bdc8db"
@@ -197,13 +205,13 @@
         </Border>
 
         <Image Height="250px"
-                Grid.Row="12"
+                Grid.Row="13"
                 Grid.Column="0"
                 Source="{Binding Pokemon.Sprites.Front_default}">
         </Image>
 
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="13"
+                    Grid.Row="14"
                     Margin="20 0 0 20">
             <Image Width="100px"
                    Source="{Binding Pokemon.Sprites.Back_default}">
@@ -228,14 +236,13 @@
                 </Image>
             </StackPanel>
         <ListView ItemsSource="{Binding Pokemon.PokemonTypes}"
-                  Grid.Row="14"
+                  Grid.Row="15"
                   Margin="20px 0px 0px 25px"
                   Grid.ColumnSpan="3"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock
-
                         FontSize="20px"
                         Text="{Binding PokemonType.Name, StringFormat=Type: {0}}" Foreground="White" Background="#4e8af2"/>
                 </DataTemplate>
@@ -248,4 +255,5 @@
                 Grid.ColumnSpan="3"
                 Command="{Binding PrintSelectedPokemonCommand}"/>
     </Grid>
+    </ScrollViewer>
 </Window>
