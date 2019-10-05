@@ -32,8 +32,12 @@
             <Button
                 Content="Sort Pokemon"
                 Command="{Binding SortByTypeCommand}"/>
+            <TextBlock Text="{Binding Pokemon.Name}"></TextBlock>
             <TextBlock Text="Id:"></TextBlock>
             <TextBlock Text="{Binding Pokemon.Id}"></TextBlock>
+
+
+            <StackPanel Orientation="Horizontal">
             <Image Width="100px"
                    Source="{Binding Pokemon.Sprites.Front_default}">
             </Image>
@@ -56,8 +60,9 @@
                    Source="{Binding Pokemon.Sprites.Back_shiny_female }">
             </Image>
             <Image Width="100px"
-                   Source="{Binding Pokemon.Sprites.Front__shiny_female}">
+                   Source="{Binding Pokemon.Sprites.Front_shiny_female}">
             </Image>
+            </StackPanel>
             <Button
                 Content="Print PDF"
                 Command="{Binding PrintSelectedPokemonCommand}"/>
