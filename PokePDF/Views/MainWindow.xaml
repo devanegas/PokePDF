@@ -58,6 +58,9 @@
             <Image Width="100px"
                    Source="{Binding Pokemon.Sprites.Front__shiny_female}">
             </Image>
+            <Button
+                Content="Print PDF"
+                Command="{Binding PrintSelectedPokemonCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

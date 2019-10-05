@@ -36,14 +36,25 @@ namespace PokePDF.Services
             image64 = getImageofPokemonSprite(pokemon.Sprites.Back_shiny);
             imageParagraph.AddImage(image64);
             imageParagraph =section.AddParagraph();
-            image64 = getImageofPokemonSprite(pokemon.Sprites.Front_female);
-            imageParagraph.AddImage(image64);
-            image64 = getImageofPokemonSprite(pokemon.Sprites.Back_female);
-            imageParagraph.AddImage(image64);
-            image64 = getImageofPokemonSprite(pokemon.Sprites.Front_shiny_female);
-            imageParagraph.AddImage(image64);
-            image64 = getImageofPokemonSprite(pokemon.Sprites.Back_shiny_female);
-            imageParagraph.AddImage(image64);
+            if (pokemon.Sprites.Front_female != null) {
+                image64 = getImageofPokemonSprite(pokemon.Sprites.Front_female);
+                imageParagraph.AddImage(image64);
+            }
+            if (pokemon.Sprites.Back_female != null)
+            {
+                image64 = getImageofPokemonSprite(pokemon.Sprites.Back_female);
+                imageParagraph.AddImage(image64);
+            }
+            if (pokemon.Sprites.Front_shiny_female != null)
+            {
+                image64 = getImageofPokemonSprite(pokemon.Sprites.Front_shiny_female);
+                imageParagraph.AddImage(image64);
+            }
+            if (pokemon.Sprites.Back_shiny_female != null)
+            {
+                image64 = getImageofPokemonSprite(pokemon.Sprites.Back_shiny_female);
+                imageParagraph.AddImage(image64);
+            }
 
             //header.AddFormattedText("This is my pdf", TextFormat.Bold);
 
@@ -69,7 +80,7 @@ namespace PokePDF.Services
             renderer.WorkingDirectory = path;
             renderer.RenderDocument();
             renderer.PdfDocument.Save(path + "report4.pdf");
-            Process.Start(path + "report3.pdf");
+            //Process.Start(path + "report3.pdf");
         }
 
         private string getImageofPokemonSprite(string urlToPokemonImage)

@@ -23,6 +23,8 @@ namespace PokePDF.ViewModels
         public ICommand SearchPokemon { get; }
         public ICommand SortByTypeCommand { get; }
 
+        public ICommand PrintSelectedPokemonCommand { get; set; }
+
 
         public MainWindowViewModel()
         {
@@ -31,8 +33,21 @@ namespace PokePDF.ViewModels
             _printingService = new PrintingService();
             SearchPokemon = new AwaitableDelegateCommand(SearchPokemonAsync);
             SortByTypeCommand = new AwaitableDelegateCommand(SortByType);
+            PrintSelectedPokemonCommand = new AwaitableDelegateCommand(PrintSelectedPokemon);
             PrintAllPokemonAsync();
            
+        }
+
+        public async Task PrintSelectedPokemon()
+        {
+            if (PokemonIsValid)
+            {
+                _printingService.Print(await _pokeService.GetPokemonInfoAsync(PokemonName));
+            }
+            else
+            {
+
+            }
         }
 
         public async Task PrintAllPokemonAsync()
@@ -41,7 +56,7 @@ namespace PokePDF.ViewModels
             Pokemon = await _pokeService.GetPokemonInfoAsync(PokemonName);
             AllPokemonNames = pokemon;
             SortedPokemonNames = pokemon;
-            _printingService.Print(await _pokeService.GetPokemonInfoAsync("pikachu"));
+           // _printingService.Print(await _pokeService.GetPokemonInfoAsync("pikachu"));
         }
         public async Task SearchPokemonAsync()
         {
