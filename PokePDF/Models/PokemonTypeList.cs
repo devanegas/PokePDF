@@ -8,6 +8,7 @@ namespace PokePDF.Models
     {
         public static List<string> PokemonTypeNames = new List<string>
         {
+            "All",
             "Normal",
             "Fighting",
             "Flying ",

@@ -35,7 +35,7 @@ namespace PokePDF.ViewModels
             SortByTypeCommand = new AwaitableDelegateCommand(SortByType);
             PrintSelectedPokemonCommand = new AwaitableDelegateCommand(PrintSelectedPokemon);
             PrintAllPokemonAsync();
-           
+
         }
 
         public async Task PrintSelectedPokemon()
@@ -65,8 +65,15 @@ namespace PokePDF.ViewModels
         }
         public async Task SortByType()
         {
-            var pokemonInfo = await _pokeService.GetPokemonByType(PokemonTypeProperty);
-            SortedPokemonNames = _pokeService.PokemonEnumerabletoStringConverter(pokemonInfo);
+            if (PokemonTypeProperty.Equals("All") == false)
+            {
+                var pokemonInfo = await _pokeService.GetPokemonByType(PokemonTypeProperty);
+                SortedPokemonNames = _pokeService.PokemonEnumerabletoStringConverter(pokemonInfo);
+            }
+            else
+            {
+                SortedPokemonNames = AllPokemonNames;
+            }
         }
 
         private string pokemonNameError;
