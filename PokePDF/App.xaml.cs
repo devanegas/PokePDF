@@ -10,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MahApps.Metro.Controls;
 using System.Windows;
 
 namespace PokePDF

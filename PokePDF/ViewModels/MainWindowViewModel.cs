@@ -34,7 +34,7 @@ namespace PokePDF.ViewModels
             SearchPokemon = new AwaitableDelegateCommand(SearchPokemonAsync);
             SortByTypeCommand = new AwaitableDelegateCommand(SortByType);
             PrintSelectedPokemonCommand = new AwaitableDelegateCommand(PrintSelectedPokemon);
-            PrintAllPokemonAsync();
+            _ = PrintAllPokemonAsync();
 
         }
 
@@ -62,6 +62,7 @@ namespace PokePDF.ViewModels
         {
             var pokemonInfo = await _pokeService.GetPokemonInfoAsync(PokemonName);
             Pokemon = pokemonInfo;
+            assignPokemonStats(Pokemon);
         }
         public async Task SortByType()
         {
@@ -75,6 +76,23 @@ namespace PokePDF.ViewModels
                 SortedPokemonNames = AllPokemonNames;
             }
         }
+
+        private PokemonStatsClassHelper pokemonStat;
+
+        public PokemonStatsClassHelper PokemonStat
+        {
+            get { return pokemonStat; }
+            set { SetProperty(ref pokemonStat, value); }
+        }
+
+        private List<PokemonStatsClassHelper> pokemonStats;
+
+        public List<PokemonStatsClassHelper> PokemonStats
+        {
+            get { return pokemonStats; }
+            set { SetProperty(ref pokemonStats, value); }
+        }
+
 
         private string pokemonNameError;
         public string PokemonNameError
@@ -117,7 +135,24 @@ namespace PokePDF.ViewModels
         public Pokemon Pokemon
         {
             get { return pokemon; }
-            set { SetProperty(ref pokemon, value); }
+            set
+            {
+                SetProperty(ref pokemon, value);
+            }
+        }
+
+        private void assignPokemonStats(Pokemon value)
+        {
+            var AllStats = new List<PokemonStatsClassHelper>();
+            foreach (var stat in value.Stats)
+            {
+                var helper = new PokemonStatsClassHelper();
+                helper.StatName = stat.Stat.Name;
+                helper.StatValue = stat.Base_stat.ToString();
+                AllStats.Add(helper);
+            }
+
+            PokemonStats = AllStats;
         }
 
         private Sprites sprites;
