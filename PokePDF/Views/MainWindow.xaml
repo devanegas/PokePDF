@@ -42,6 +42,9 @@
                 Property="Margin"
                 Value="0 10 0 10"/>
         </Style>
+        <Style TargetType="ListViewItem">
+            <Setter Property="Focusable" Value="false"/>
+        </Style>
         <Style TargetType="ComboBox">
             <Setter
                 Property="FontFamily"
@@ -82,23 +85,26 @@
         <TextBlock
             Height="100px"
             Background="#B72F2E"
-            Grid.ColumnSpan="1"
+            Grid.ColumnSpan="3"
             Margin="0px 0px 0px 0px"
             Grid.Row="0"/>
         <Image
             Height="150px"
             Grid.Row="0"
+            Grid.ColumnSpan="3"
             Source="https://cdn4.iconfinder.com/data/icons/longico/224/longico-23-512.png"/>
 
         <TextBlock
             Text="Enter Pokemon Name"
             Grid.Row="1"
+            Grid.ColumnSpan="3"
             FontWeight="Thin"
             FontSize="20px"
             HorizontalAlignment="Center"
             />
         <TextBox
             Grid.Row="2"
+            Grid.ColumnSpan="3"
             Height="30px"
             FontSize="25px"
             FontFamily="Arial"
@@ -106,16 +112,19 @@
             Text="{Binding PokemonName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock
             Height="25px"
+            Grid.ColumnSpan="3"
             FontSize="18px"
             Grid.Row="3"
             Text="{Binding PokemonNameError}" Visibility="{Binding PokemonNameErrorVisibility}"/>
         <Button
             Grid.Row="4"
+            Grid.ColumnSpan="3"
             Content="Search Pokemon"
             Command="{Binding SearchPokemon}" IsEnabled="{Binding PokemonIsValid}"/>
 
         <TextBlock
             Text="Select Pokemon Type:"
+            Grid.ColumnSpan="3"
             Grid.Row="5"
             FontWeight="Thin"
             FontSize="20px"
@@ -125,12 +134,14 @@
 
         <ComboBox ItemsSource="{Binding ListOfPokemonType}"
             SelectedValue="{Binding PokemonTypeProperty}"
+                  Grid.ColumnSpan="3"
             SelectedIndex="0"
             Grid.Row="6"/>
 
         <TextBlock
             Text="Select Pokemon By Filter:"
             Grid.Row="7"
+            Grid.ColumnSpan="3"
             FontWeight="Thin"
             FontSize="20px"
             Margin="0 25 0 0"
@@ -138,10 +149,12 @@
                 />
         <ComboBox ItemsSource="{Binding SortedPokemonNames}"
                 SelectedValue="{Binding PokemonName}"
+                  Grid.ColumnSpan="3"
                 Grid.Row="8"/>
         <Button
             Content="Sort Pokemon"
             Command="{Binding SortByTypeCommand}"
+            Grid.ColumnSpan="3"
             Grid.Row="9"/>
 
         <TextBlock
@@ -153,6 +166,26 @@
             Grid.Row="11"
             FontSize="25px"
             Text="{Binding Pokemon.Name, StringFormat=Pokemon Name: {0}}"/>
+        <ListView ItemsSource="{Binding PokemonStats}"
+                  Grid.Row="11"
+                  Grid.Column="2"
+                  Grid.RowSpan="2"
+                  Width="150px"
+                  Height="400px"
+                  Margin="0 48 0 0"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel
+                        Orientation="Vertical"
+                        HorizontalAlignment="Right"
+                        >
+                        <TextBlock Text="{Binding StatName}" Foreground="Black" FontSize="15px"/>
+                        <TextBlock Text="{Binding StatValue}" Foreground="Green" FontSize="15px" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <Border CornerRadius="20" Grid.Row="12">
             <TextBlock
                 Height="400px"
@@ -195,13 +228,16 @@
                 </Image>
             </StackPanel>
         <ListView ItemsSource="{Binding Pokemon.PokemonTypes}"
-                  Grid.Row="14">
+                  Grid.Row="14"
+                  Margin="20px 0px 0px 25px"
+                  Grid.ColumnSpan="3"
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock
 
                         FontSize="20px"
-                        Text="{Binding PokemonType.Name, StringFormat=Type: {0}}" Foreground="White" Background="#B72F2E"/>
+                        Text="{Binding PokemonType.Name, StringFormat=Type: {0}}" Foreground="White" Background="#4e8af2"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -209,6 +245,7 @@
         <Button
                 Grid.Row="16"
                 Content="Print PDF"
+                Grid.ColumnSpan="3"
                 Command="{Binding PrintSelectedPokemonCommand}"/>
     </Grid>
 </Window>
